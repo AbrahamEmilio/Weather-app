@@ -1,12 +1,25 @@
 .header{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 100%;
-    background-color: blue;
-    padding: 50px 0px;
+    background: rgb(43,67,153);
+    background: linear-gradient(45deg, rgba(43,67,153,1) 0%, rgba(110,137,230,1) 100%); 
+    padding: 30px 0px;
 
     &__menu{
         display: flex;
         gap: 50px;
+    }
+
+    &__title{
+        color: white;
+        font-size: 30px;
+        font-weight: 900;
+    }
+
+    &__listItem{
+        list-style: none;
+        color: white;
     }
 }

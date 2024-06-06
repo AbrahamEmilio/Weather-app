@@ -6,20 +6,20 @@ function Header(){
         <>
             <div className='header'>
                     <div className='header__title-container'>
-                        <p>Weather App</p>
+                        <p className='header__title'>Weather App</p>
                     </div>
                     <div className='header__menu-container'>
                         <ul className='header__menu'>
-                            <li>
+                            <li className='header__listItem'>
                                 <p>Prueba</p>
                             </li>
-                            <li>
+                            <li className='header__listItem'>
                                 <p>Prueba</p>
                             </li>
-                            <li>
+                            <li className='header__listItem'>
                                 <p>Prueba</p>
                             </li>
-                            <li>
+                            <li className='header__listItem'>
                                 <p>Prueba</p>
                             </li>
                         </ul>
