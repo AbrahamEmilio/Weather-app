@@ -19,6 +19,7 @@ function WeatherCity (){
         const objectData = await responseW.json();
 
         setDataWeather(objectData)
+        console.log(dataWeather)
     }
 
     return(
@@ -37,7 +38,7 @@ function WeatherCity (){
                     </div>
                     <div>
                         <img src="" alt="" />
-                        <p>34C</p>
+                        <p>{Math.trunc(dataWeather.main.temp - 273) + ' °'}</p>
                     </div>
                 </div>
                 <div className='weatherCity__week'>
