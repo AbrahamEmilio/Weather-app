@@ -11,6 +11,24 @@
         display: flex;
         gap: 50px;
     }
+
+    &_title{
+        font-size: 20px;
+        color: #5A5A5A;
+        font-weight: medium;
+    }
+
+    &_input{
+        border-radius: 20px 0px 0px 20px;
+        border: 1px solid #5A5A5A;
+        padding: 10px 20px;
+    }
+
+    &_button{
+        border: none;
+        border-radius: 0px 20px 20px 0px;
+        padding: 10px 20px;   
+    }
 }
 
 .weather{

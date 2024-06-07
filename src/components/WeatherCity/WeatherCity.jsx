@@ -24,11 +24,10 @@ function WeatherCity (){
     return(
         <>
             <div className='weatherCity'>
-                <h3>Search the weather of your city</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, placeat?</p>
+                <h3 className='weatherCity_title'>Search the weather of your city</h3>
                 <div>
-                    <input className='input' type="text" placeholder='Search your city' onChange={(e) => {setCityName(e.target.value)}} />
-                    <button onClick={()=>{
+                    <input className='weatherCity_input' type="text" placeholder='Search your city' onChange={(e) => {setCityName(e.target.value)}} />
+                    <button className='weatherCity_button' onClick={()=>{
                         getCoordinates();
                     }}>Search</button>
                 </div>

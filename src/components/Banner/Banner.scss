@@ -6,4 +6,17 @@
     flex-direction: column;
     padding: 50px 0px;
     background-color: white;
+    gap: 10px;
+
+    &_title{
+        font-size: 20px;
+        color: #5A5A5A;
+        font-weight: medium;
+    }
+
+    &_text{
+        font-size: 15px;
+        color: #5A5A5A;
+        font-weight: light;
+    }
 }

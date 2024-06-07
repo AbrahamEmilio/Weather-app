@@ -11,16 +11,13 @@ function Header(){
                     <div className='header__menu-container'>
                         <ul className='header__menu'>
                             <li className='header__listItem'>
-                                <p>Prueba</p>
+                                <p>Weather</p>
                             </li>
                             <li className='header__listItem'>
-                                <p>Prueba</p>
+                                <p>About us</p>
                             </li>
                             <li className='header__listItem'>
-                                <p>Prueba</p>
-                            </li>
-                            <li className='header__listItem'>
-                                <p>Prueba</p>
+                                <p>Contact</p>
                             </li>
                         </ul>
                     </div>
