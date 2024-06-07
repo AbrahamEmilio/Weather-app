@@ -7,18 +7,18 @@ function WeatherCity (){
 
     const [cityName, setCityName] = useState('');
     const [dataWeather, setDataWeather] = useState('');
-
+ 
     const getCoordinates = async() => {
         const responseL = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}`)
         const dataL = await responseL.json()
         
-        let lat = dataL[0].lat.toFixed(2);
-        let lon = dataL[0].lon.toFixed(2);
+        let lat = await dataL[0].lat.toFixed(2);
+        let lon = await dataL[0].lon.toFixed(2);
 
         const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
-        const dataW = await responseW.json();
+        const objectData = await responseW.json();
 
-        setDataWeather(dataW)
+        setDataWeather(objectData)
     }
 
     return(
@@ -33,7 +33,7 @@ function WeatherCity (){
                 </div>
                 <div>
                     <div>
-                        <p></p>
+                        <p className='cityName'>{dataWeather.name}</p>
                     </div>
                     <div>
                         <img src="" alt="" />
