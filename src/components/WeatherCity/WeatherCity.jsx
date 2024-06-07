@@ -1,82 +1,40 @@
 import {React,  useState} from 'react';
 import './WeatherCity.scss';
 import WeatherCityCard from './WeatherCityCard/WeatherCityCard.jsx';
-const API_KEY = '5c1c969d600654194e2c5b11a4e63a4c';
+const API_KEY = 'c60df418b9927150faa290e3d8418c82';
 
 function WeatherCity (){
 
-    const [weatherCity, setWeatherCity] = useState()
-
-    let lat;
-    let lon;
-
-    // let weatherWeek = [
-    //     {
-    //         nameCity: 'Dallas',
-    //         weather: 32,
-    //         day: 'Monday'
-    //     },
-    //     {
-    //         nameCity: 'Dallas',
-    //         weather: 32,
-    //         day: 'Tuesday'
-    //     },
-    //     {
-    //         nameCity: 'Dallas',
-    //         weather: 32,
-    //         day: 'Wednesday'
-    //     },
-    //     {
-    //         nameCity: 'Dallas',
-    //         weather: 32,
-    //         day: 'Thursday'
-    //     },
-    //     {
-    //         nameCity: 'Dallas',
-    //         weather: 32,
-    //         day: 'Saturday'
-    //     },
-    //     {
-    //         nameCity: 'Dallas',
-    //         weather: 32,
-    //         day: 'Sunday'
-    //     }
-    // ];
+    const [cityName, setCityName] = useState('');
+    const [dataWeather, setDataWeather] = useState('');
 
     const getCoordinates = async() => {
-        const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q='dallas'&appid=${API_KEY}`)
-        const data = await response.json()
-        console.log(data)
+        const responseL = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}`)
+        const dataL = await responseL.json()
         
-        // lat = data[0].lat.toFixed(2);
-        // lon = data[0].lon.toFixed(2);
+        let lat = dataL[0].lat.toFixed(2);
+        let lon = dataL[0].lon.toFixed(2);
 
-        // getData(lat, lon);
+        const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
+        const dataW = await responseW.json();
+
+        setDataWeather(dataW)
     }
 
-    // const getData = async() => {
-    //     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
-    //     const data = await response.json();
-
-    //     setWeatherCity(data);
-    // }
-
-    getCoordinates();
-
-
-    
     return(
         <>
             <div className='weatherCity'>
                 <h3>Search the weather of your city</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, placeat?</p>
                 <div>
-                    <input type="text" placeholder='Search your city' />
-                    <button>Search</button>
+                    <input className='input' type="text" placeholder='Search your city' onChange={(e) => {setCityName(e.target.value)}} />
+                    <button onClick={()=>{
+                        getCoordinates();
+                    }}>Search</button>
                 </div>
                 <div>
                     <div>
-                        {/* <p>{weatherCity.weather[0].main}</p> */}
+                        <p></p>
                     </div>
                     <div>
                         <img src="" alt="" />
