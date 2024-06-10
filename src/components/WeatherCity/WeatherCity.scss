@@ -6,6 +6,7 @@
     align-items: center;
     padding: 50px 0px;
     gap: 50px;
+    height: 400px;
 
     &__searchContainer{
         display: flex;
@@ -44,6 +45,11 @@
         cursor: pointer;
     }
 
+    &__tempMaxMinContainer{
+        display: flex;
+        gap:  15px;
+    }
+
     &__container{
         display: flex;
         justify-content: center;
@@ -59,7 +65,7 @@
     }
 
     &__icon{
-        width: 170px;
+        width: 180px;
     }
 
     &__tempContainer{
@@ -86,6 +92,18 @@
         font-size: 40px;
         color: white;
         font-weight: 900;
+    }
+    
+    &__tempMax{
+        font-size: 20px;
+        color: white;
+        font-weight: 300;
+    }
+
+    &__tempMin{
+        font-size: 20px;
+        color: white;
+        font-weight: 300;
     }
 
     &__description{
@@ -117,6 +135,20 @@
         color: white;
         font-weight: 300;
     }
+
+    &Week{
+
+    &__container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+    &__cards{
+            display: flex;
+        }
+    }
 }
 
 .weather{
@@ -126,4 +158,8 @@
     gap: 100px;
     padding: 50px;
     background-color: pink;
+}
+
+.hidden{
+    display: none;
 }
