@@ -3,3 +3,8 @@
     margin: 0px;
     font-family: "Roboto", sans-serif;
 }
+
+body{
+    background-color: rgb(43,67,153);
+    background: linear-gradient(45deg, rgba(43,67,153,1) 0%, rgba(110,137,230,1) 100%); 
+}

@@ -5,18 +5,17 @@
     align-items: center;
     flex-direction: column;
     padding: 50px 0px;
-    background-color: white;
     gap: 10px;
 
     &_title{
-        font-size: 20px;
-        color: #5A5A5A;
+        font-size: 30px;
+        color: white;
         font-weight: medium;
     }
 
     &_text{
-        font-size: 15px;
-        color: #5A5A5A;
-        font-weight: light;
+        font-size: 20px;
+        color: white;
+        font-weight: 300;
     }
 }

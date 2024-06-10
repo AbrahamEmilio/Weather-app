@@ -4,7 +4,6 @@
     align-items: center;
     width: 100%;
     background: rgb(43,67,153);
-    background: linear-gradient(45deg, rgba(43,67,153,1) 0%, rgba(110,137,230,1) 100%); 
     padding: 30px 0px;
 
     &__menu{
@@ -23,5 +22,6 @@
         color: white;
         font-weight: lighter;
         font-size: 15px;
+        cursor: pointer;
     }
 }
