@@ -5,8 +5,10 @@ const API_KEY = 'c60df418b9927150faa290e3d8418c82';
 
 import cloudy from '../../assets/clouds.png'
 
-function WeatherCity (){
+import cloudyCard from '../../assets/clouds.png'
 
+
+function WeatherCity (){
 
     const [cityName, setCityName] = useState('');
     const [dataWeather, setDataWeather] = useState('');
@@ -16,8 +18,10 @@ function WeatherCity (){
     const [name, setName] = useState('');
     const [country, setCountry] = useState('');
     const [daysWeather, setDaysWeather] = useState([]);
-    
+    const [date, setDate] = useState([]);
+    // const [dayWeek, setDayWeek] = useState([]);
 
+    
         const getCoordinates = async() => {
             const responseL = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}`);
             const dataL = await responseL.json();
@@ -31,12 +35,21 @@ function WeatherCity (){
 
             const responseD = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
             const dataD = await responseD.json();
-            let days = [];
-            for(let i = 0; i < 8; i++){
-                days.push(dataD.list[i])
-            }
-            setDaysWeather(days)
-            // setDaysWeather(dataD.list)
+            
+            setDaysWeather(dataD.list);
+
+            let week = dataD.list;
+            let arrWeek = [];
+
+            week.forEach((element) => {
+                // arrWeek.push(element.dt_txt)
+                let firstArray = element.dt_txt.split(' ');
+                let secondArray = firstArray[0].split('-');
+                arrWeek.push(secondArray[2]);
+            })
+
+            // setDayWeek(arrWeek)
+            setDate(arrWeek)
 
             setName(dataW.name);
             setTemp(Math.trunc(dataW.main.temp - 273) + ' °');
@@ -57,7 +70,7 @@ function WeatherCity (){
                         }}>Search</button>
                     </div>
                 </div>
-                <div>
+                <div className='weatherCity'>
                     <div className={dataWeather ? 'weatherCity__container' : 'hidden'}>
                         <img src={cloudy} className='weatherCity__icon' alt="" />
                         <div className='weatherCity__infoContainer'>
@@ -81,14 +94,15 @@ function WeatherCity (){
                             </div>
                         </div>
                     </div>
-                    <div className='weatherCityWeek__container'>
+                    <div className={dataWeather ? 'weatherCityWeek__container' : 'hidden'}>
                         <p className='weatherCityWeek__title'>The weather of the week</p>
                         <div className='weatherCityWeek__cards'>
                             {daysWeather.map((day) => {
-                                return <WeatherCityCard temp={Math.trunc(day.main.temp - 273) + '°'} day={day.dt_txt} min={'Min ' + Math.trunc(day.main.temp_min - 273) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max - 273) + ' °'} />
+                                return <WeatherCityCard temp={Math.trunc(day.main.temp - 273) + '°'} day={day.dt_txt} min={'Min ' + Math.trunc(day.main.temp_min - 273) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max - 273) + ' °'} img={cloudyCard} key={day.dt_txt}/>
                             })}
                         </div>
                     </div>
+                    {console.log(date)}
                 </div>
                 <div className='weatherCity__week'>
                 </div>

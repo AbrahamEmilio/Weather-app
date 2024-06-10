@@ -2,13 +2,11 @@ import {React} from 'react';
 import './WeatherCityCard.scss';
 
 
-function WeatherCityCard ({temp, day, min, max}){
+function WeatherCityCard ({temp, day, min, max, img, key}){
     return(
         <>
-            <div className='weatherCityCard'>
-                <div className=''>
-                    <img className='' src="" alt="" />
-                </div>
+            <div className='weatherCityCard' key={key}>
+                <img className='weatherCityCard__icon' src={img} alt="" />
                 <div weatherCityCard__info>
                     <p className='weatherCityCard__temp'>{temp}</p>
                     <div className='weatherCityCard__maxContainer'>

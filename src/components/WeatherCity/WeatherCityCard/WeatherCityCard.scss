@@ -10,6 +10,7 @@
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.10);
     padding: 10px 20px;
     border-radius: 20px;
+    height: 200px;
 
     &__info{
         display: flex;
@@ -48,5 +49,9 @@
         font-size: 15px;
         color: white;
         font-weight: 300;
+    }
+
+    &__icon{
+        width: 50px;
     }
 }
