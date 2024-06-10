@@ -8,6 +8,7 @@ function WeatherCity (){
     const [cityName, setCityName] = useState('');
     const [dataWeather, setDataWeather] = useState('');
     const [temp, setTemp] = useState('');
+    const [name, setName] = useState('');
 
 
         const getCoordinates = async() => {
@@ -23,6 +24,13 @@ function WeatherCity (){
             setDataWeather(objectData)
         }
 
+        const data = () => {
+            setTemp(Math.trunc(dataWeather.main.temp - 273) + ' °');
+            setName(dataWeather.name);
+        }
+
+        data()
+
     return(
         <>
             <div className='weatherCity'>
@@ -35,14 +43,11 @@ function WeatherCity (){
                 </div>
                 <div>
                     <div>
-                        <p className='cityName'>{dataWeather.name}</p>
+                        <p className='cityName'>{!!name ? name : ''}</p>
                     </div>
                     <div>
                         <img src="" alt="" />
-                        <p>{()=>{
-                            setTemp(Math.trunc(dataWeather.main.temp - 273) + ' °');
-                            return !!temp ? temp : '';
-                        }}</p>
+                        <p>{!!temp ? temp : ''}</p>
                     </div>
                 </div>
                 <div className='weatherCity__week'>
