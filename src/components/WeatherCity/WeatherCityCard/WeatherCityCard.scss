@@ -8,6 +8,45 @@
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.10);
-    padding: 30px 40px;
+    padding: 10px 20px;
     border-radius: 20px;
+
+    &__info{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__temp{
+        font-size: 40px;
+        color: white;
+        font-weight: 900;
+        text-align: center;
+    }
+
+    &__maxContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__max{
+        font-size: 15px;
+        color: white;
+        font-weight: 300;
+    }
+
+    &__min{
+        font-size: 15px;
+        color: white;
+        font-weight: 300;
+    }
+
+    &__day{
+        font-size: 15px;
+        color: white;
+        font-weight: 300;
+    }
 }

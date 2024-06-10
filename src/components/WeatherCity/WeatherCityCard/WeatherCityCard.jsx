@@ -9,13 +9,13 @@ function WeatherCityCard ({temp, day, min, max}){
                 <div className=''>
                     <img className='' src="" alt="" />
                 </div>
-                <div>
-                    <p className=''>{temp}</p>
-                    <div className=''>
-                        <p className=''>{min}</p>
-                        <p className=''>{max}</p>
+                <div weatherCityCard__info>
+                    <p className='weatherCityCard__temp'>{temp}</p>
+                    <div className='weatherCityCard__maxContainer'>
+                        <p className='weatherCityCard__max'>{max}</p>
+                        <p className='weatherCityCard__min'>{min}</p>
                     </div>
-                    <p className=''>{day}</p>
+                    <p className='weatherCityCard__day'>{day}</p>
                 </div>
             </div>
         </>

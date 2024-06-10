@@ -82,10 +82,10 @@ function WeatherCity (){
                         </div>
                     </div>
                     <div className='weatherCityWeek__container'>
-                        <p>The weather of the week</p>
+                        <p className='weatherCityWeek__title'>The weather of the week</p>
                         <div className='weatherCityWeek__cards'>
                             {daysWeather.map((day) => {
-                                return <WeatherCityCard temp={day.main.temp} day={day.dt_txt} min={day.main.temp_min} max={day.main.temp_max} />
+                                return <WeatherCityCard temp={Math.trunc(day.main.temp - 273) + '°'} day={day.dt_txt} min={'Min ' + Math.trunc(day.main.temp_min - 273) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max - 273) + ' °'} />
                             })}
                         </div>
                     </div>
