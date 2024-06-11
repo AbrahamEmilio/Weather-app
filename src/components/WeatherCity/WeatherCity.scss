@@ -4,16 +4,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0px 0px 50px 0px;
     gap: 50px;
-    // height: 400px;
+    height: 100vh;
+    background-color: rgb(43,67,153);
+    background: linear-gradient(45deg, rgba(43,67,153,1) 0%, rgba(110,137,230,1) 100%); 
+
+    &Info{
+        height: 500px;
+    }
 
     &__searchContainer{
         display: flex;
         gap: 50px;
         justify-content: center;
         align-items: center;
-        padding: 50px 0px;
+        padding: 0px 0px 50px 0px;
     }
 
     &__week{
@@ -60,9 +65,9 @@
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.18);
         box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.10);
-        padding: 30px 0px;
+        padding: 30px 40px;
         border-radius: 20px;
-        width: 30%;
+        gap: 30px;
     }
 
     &__icon{
@@ -77,11 +82,15 @@
     &__weatherContainer{
         display: flex;
         gap: 10px;
+        margin: 10px 0px 0px 0px;
     }
 
     &__windContainer{
         display: flex;
+        justify-content: start;
+        align-items: center;
         gap: 10px;
+        margin: 5px 0px;
     }
 
     &__cityContainer{
@@ -90,7 +99,7 @@
     }
 
     &__temp{
-        font-size: 40px;
+        font-size: 50px;
         color: white;
         font-weight: 900;
     }
@@ -113,10 +122,8 @@
         font-weight: 300;
     }
 
-    &__wind{
-        font-size: 20px;
-        color: white;
-        font-weight: 300;
+    &__windIcon{
+        width: 35px;
     }
 
     &__speed{

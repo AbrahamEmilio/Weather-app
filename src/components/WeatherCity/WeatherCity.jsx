@@ -3,8 +3,12 @@ import './WeatherCity.scss';
 import WeatherCityCard from './WeatherCityCard/WeatherCityCard.jsx';
 const API_KEY = 'c60df418b9927150faa290e3d8418c82';
 
-import cloudy from '../../assets/clouds.png'
-import cloudyCard from '../../assets/clouds.png'
+import clouds from '../../assets/cloud.png'
+import clear from '../../assets/sun.png'
+import rain from '../../assets/raining.png'
+import wind from '../../assets/wind.png'
+
+import cloudyCard from '../../assets/cloud.png'
 
 
 function WeatherCity (){
@@ -17,7 +21,8 @@ function WeatherCity (){
     const [name, setName] = useState('');
     const [country, setCountry] = useState('');
     const [climaDia, setClimaDia] = useState([]);
-    const [clima, setClima] = useState()
+    const [clima, setClima] = useState();
+    const [weatherIcon, setWeatherIcon] = useState();
     
         const getCoordinates = async() => {
             const responseL = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}&units=metric`);
@@ -35,6 +40,27 @@ function WeatherCity (){
             setTempMax('Max ' + Math.trunc(dataW.main.temp_max) + ' °');
             setTempMin('Min ' + Math.trunc(dataW.main.temp_min) + ' °');
             setCountry(dataW.sys.country);
+
+            switch(dataW.weather[0].main){
+
+                case 'Clouds':
+                setWeatherIcon(clouds);
+                console.log('clouds');
+                break;
+
+                case 'Clear':
+                setWeatherIcon(clear);
+                console.log('clear');
+                break;
+
+                case 'Rain':
+                    setWeatherIcon(rain);
+                    console.log('raining');
+                break;
+
+                default:
+                    setWeatherIcon(clear)
+            }
 
             getWeatherHouer(lat, lon)
 
@@ -92,9 +118,9 @@ function WeatherCity (){
                         }}>Search</button>
                     </div>
                 </div>
-                <div className='weatherCity'>
+                <div className='weatherCityInfo'>
                     <div className={dataWeather ? 'weatherCity__container' : 'hidden'}>
-                        <img src={cloudy} className='weatherCity__icon' alt="" />
+                        <img src={weatherIcon} className='weatherCity__icon' alt="" />
                         <div className='weatherCity__infoContainer'>
                             <div className='weatherCity__tempContainer'>
                                 <p className='weatherCity__temp'>{temp}</p>
@@ -104,10 +130,10 @@ function WeatherCity (){
                                 <p className='weatherCity__tempMin'>{tempMin}</p>
                             </div>
                             <div className='weatherCity__weatherContainer'>
-                                <p className='weatherCity__description'>{(dataWeather ? dataWeather.weather[0].description : '')}</p>
+                                <p className='weatherCity__description'>{(dataWeather ? dataWeather.weather[0].main : '')}</p>
                             </div>
                             <div className='weatherCity__windContainer'>
-                                <p className='weatherCity__wind'>Wind</p>
+                            <img className='weatherCity__windIcon' src={wind} alt="" />
                                 <p className='weatherCity__speed'>{(dataWeather ? dataWeather.wind.speed : '')}</p>
                             </div>
                             <div className='weatherCity__cityContainer'>
