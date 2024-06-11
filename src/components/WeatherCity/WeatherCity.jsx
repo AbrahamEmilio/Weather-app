@@ -20,7 +20,7 @@ function WeatherCity (){
     const [clima, setClima] = useState()
     
         const getCoordinates = async() => {
-            const responseL = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}&units=metric`);
+            const responseL = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}&units=metric`);
             const dataL = await responseL.json();
 
             let lat = await dataL[0].lat.toFixed(2);
