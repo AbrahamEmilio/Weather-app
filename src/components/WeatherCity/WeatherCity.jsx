@@ -16,7 +16,6 @@ function WeatherCity (){
     const [tempMin, setTempMin] = useState('');
     const [name, setName] = useState('');
     const [country, setCountry] = useState('');
-    const [daysWeather, setDaysWeather] = useState([]);
     const [climaDia, setClimaDia] = useState([]);
     
         const getCoordinates = async() => {
@@ -45,7 +44,8 @@ function WeatherCity (){
             const dataD = await responseD.json();
 
             //Guardamos el array con el clima por hora en DaysWeather
-            setDaysWeather(dataD.list);
+            let daysWeather;
+            daysWeather = dataD.list;
 
             //Creamos un array para almacenar solo los dias de la lista
             let arrWeek = [];
