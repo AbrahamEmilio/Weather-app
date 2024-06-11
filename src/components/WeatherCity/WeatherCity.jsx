@@ -17,22 +17,23 @@ function WeatherCity (){
     const [name, setName] = useState('');
     const [country, setCountry] = useState('');
     const [climaDia, setClimaDia] = useState([]);
+    const [clima, setClima] = useState()
     
         const getCoordinates = async() => {
-            const responseL = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}`);
+            const responseL = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}&units=metric`);
             const dataL = await responseL.json();
 
             let lat = await dataL[0].lat.toFixed(2);
             let lon = await dataL[0].lon.toFixed(2);
 
-            const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
+            const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
             const dataW = await responseW.json();
             setDataWeather(dataW);
 
             setName(dataW.name);
-            setTemp(Math.trunc(dataW.main.temp - 273) + ' °');
-            setTempMax('Max ' + Math.trunc(dataW.main.temp_max - 273) + ' °');
-            setTempMin('Min ' + Math.trunc(dataW.main.temp_min - 273) + ' °');
+            setTemp(Math.trunc(dataW.main.temp) + ' °');
+            setTempMax('Max ' + Math.trunc(dataW.main.temp_max) + ' °');
+            setTempMin('Min ' + Math.trunc(dataW.main.temp_min) + ' °');
             setCountry(dataW.sys.country);
 
             getWeatherHouer(lat, lon)
@@ -40,13 +41,13 @@ function WeatherCity (){
         }
 
         const getWeatherHouer = async(lat, lon) => {
-            const responseD = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
+            const responseD = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
             const dataD = await responseD.json();
 
             //Guardamos el array con el clima por hora en DaysWeather
             let daysWeather;
             daysWeather = dataD.list;
-
+            setClima(dataD.list)
             //Creamos un array para almacenar solo los dias de la lista
             let arrWeek = [];
 
@@ -119,11 +120,12 @@ function WeatherCity (){
                         <p className='weatherCityWeek__title'>The weather of the week</p>
                         <div className='weatherCityWeek__cards'>
                             {climaDia.map((day) => {
-                                return <WeatherCityCard temp={Math.trunc(day.main.temp - 273) + '°'} day={day.dt_txt} min={'Min ' + Math.trunc(day.main.temp_min - 273) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max - 273) + ' °'} img={cloudyCard} key={day.dt_txt}/>
+                                return <WeatherCityCard temp={Math.trunc(day.main.temp) + '°'} day={day.dt_txt} min={'Min ' + Math.trunc(day.main.temp_min) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max) + ' °'} img={cloudyCard} key={day.dt_txt}/>
                             })}
                         </div>
                     </div>
                 </div>
+                {console.log(clima)}
                 <div className='weatherCity__week'>
                 </div>
             </div>
