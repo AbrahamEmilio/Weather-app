@@ -24,6 +24,7 @@ function WeatherCity (){
     const [clima, setClima] = useState();
     const [weatherIcon, setWeatherIcon] = useState();
     const [arrCities, setArrCities] = useState([]);
+    const [map, setMap] = useState('');
     
         const getCoordinates = async() => {
             const responseL = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}&units=metric`);
@@ -65,7 +66,7 @@ function WeatherCity (){
         }
 
         const getWeatherHouer = async(lat, lon) => {
-            const responseD = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
+            const responseD = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&timezone_offset=${'GMT-6'}`);
             const dataD = await responseD.json();
 
             //Guardamos el array con el clima por hora en DaysWeather
@@ -103,43 +104,51 @@ function WeatherCity (){
 
         }
 
-    const weatherRandom = async() => {
+        const weatherRandom = async() => {
 
-        let arrayCiudades = [];
-        const cities = ['Paris', 'Tokyo', 'Toronto', 'New York', 'Ciudad de mexico', 'Los angeles', 'dinamarca', 'Dubai', 'San francisco', 'Estambul', 'Oporto', 'Seul', 'Amsterdam', 'Praga', 'Bangkok']
-        let numbers = [];
+            let arrayCiudades = [];
+            const cities = ['Paris', 'Tokyo', 'Toronto', 'New York', 'Ciudad de mexico', 'Los angeles', 'dinamarca', 'Dubai', 'San francisco', 'Estambul', 'Oporto', 'Seul', 'Amsterdam', 'Praga', 'Bangkok']
+            let numbers = [];
 
-        for(let i = 0; i < 3; i++){
+            for(let i = 0; i < 5; i++){
 
-                let nr = Math.floor(Math.random() * cities.length -1)
+                    let nr = Math.floor(Math.random() * cities.length -1)
 
-                if(!numbers.includes(nr)){
-                    numbers.push(nr)
-                    console.log('no esta')
-                } else {
-                    console.log('si estaba')
-                    nr = Math.floor(Math.random() * cities.length -1)
-                    numbers.push(nr)
+                    if(!numbers.includes(nr)){
+                        numbers.push(nr)
+                        console.log('no esta')
+                    } else {
+                        console.log('si estaba')
+                        nr = Math.floor(Math.random() * cities.length -1)
+                        numbers.push(nr)
+                    }
                 }
-            }
 
-        await Promise.all (numbers.map(async (e) => {
-            const responseL = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cities[e]}&appid=${API_KEY}&units=metric`);
-            const dataL = await responseL.json();
-        
-            let lat = await dataL[0].lat.toFixed(2);
-            let lon = await dataL[0].lon.toFixed(2);
-        
-            const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
-            const dataW = await responseW.json();
-            arrayCiudades.push(dataW);
-        }))
+            await Promise.all (numbers.map(async (e) => {
+                const responseL = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cities[e]}&appid=${API_KEY}&units=metric`);
+                const dataL = await responseL.json();
+            
+                let lat = await dataL[0].lat.toFixed(2);
+                let lon = await dataL[0].lon.toFixed(2);
+            
+                const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
+                const dataW = await responseW.json();
+                arrayCiudades.push(dataW);
+            }))
 
-        setArrCities(arrayCiudades)
-    }
+            setArrCities(arrayCiudades)
+        }
+
+        const getMap = async() => {
+            const response = await fetch(`https://tile.openweathermap.org/map/{temp_new}/${1}/${1}/${1}.png?appid=${API_KEY}`)
+            const data = await response.json()
+            console.log(data)
+            setMap(data)
+        }
 
     useEffect(() => {
         weatherRandom()
+        getMap()
     }, [])
 
     return(
@@ -154,6 +163,7 @@ function WeatherCity (){
                         }}>Search</button>
                     </div>
                 </div>
+                {console.log(arrCities)}
                 <div className='weatherCityInfo'>
                     <div className={dataWeather ? 'weatherCity__container' : 'hidden'}>
                         <img src={weatherIcon} className='weatherCity__icon' alt="" />
@@ -186,8 +196,12 @@ function WeatherCity (){
                             })}
                         </div>
                     </div>
+                    <div>
+                        <img src={map} alt="" />
+                    </div>
                 </div>
                 <div className='weatherCity__random'>
+                    <p className='weatherCity__randomTitle'>The weather of the world</p>
                     <div className='weatherCity__containerRandom'>
                         {
                             arrCities.map((day) => {

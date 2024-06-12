@@ -11,6 +11,16 @@
 
     &__random{
         padding: 10px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &Title{
+            font-size: 30px;
+            color: white;
+            font-weight: 300;
+        }
     }
 
     &__containerRandom{
