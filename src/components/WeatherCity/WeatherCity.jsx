@@ -107,21 +107,33 @@ function WeatherCity (){
 
         let arrayCiudades = [];
         const cities = ['Paris', 'Tokyo', 'Toronto', 'New York', 'Ciudad de mexico', 'Los angeles', 'dinamarca', 'Dubai', 'San francisco', 'Estambul', 'Oporto', 'Seul', 'Amsterdam', 'Praga', 'Bangkok']
+        let numbers = [];
 
         for(let i = 0; i < 3; i++){
 
                 let nr = Math.floor(Math.random() * cities.length -1)
 
-                const responseL = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cities[nr]}&appid=${API_KEY}&units=metric`);
-                const dataL = await responseL.json();
-        
-                let lat = await dataL[0].lat.toFixed(2);
-                let lon = await dataL[0].lon.toFixed(2);
-        
-                const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
-                const dataW = await responseW.json();
-                arrayCiudades.push(dataW);
+                if(!numbers.includes(nr)){
+                    numbers.push(nr)
+                    console.log('no esta')
+                } else {
+                    console.log('si estaba')
+                    nr = Math.floor(Math.random() * cities.length -1)
+                    numbers.push(nr)
+                }
             }
+
+        await Promise.all (numbers.map(async (e) => {
+            const responseL = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cities[e]}&appid=${API_KEY}&units=metric`);
+            const dataL = await responseL.json();
+        
+            let lat = await dataL[0].lat.toFixed(2);
+            let lon = await dataL[0].lon.toFixed(2);
+        
+            const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
+            const dataW = await responseW.json();
+            arrayCiudades.push(dataW);
+        }))
 
         setArrCities(arrayCiudades)
     }
