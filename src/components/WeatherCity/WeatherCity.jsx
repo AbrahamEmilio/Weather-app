@@ -145,15 +145,6 @@ function WeatherCity (){
     return(
         <>
             <div className='weatherCity'>
-                <div className='weatherCity__random'>
-                    <div className='weatherCity__containerRandom'>
-                        {
-                            arrCities.map((day) => {
-                                return <WeatherRandom temp={Math.trunc(day.main.temp) + '°'} city={day.name} weather={day.weather[0].main} min={'Min ' + Math.trunc(day.main.temp_min) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max) + ' °'} img={(day.weather[0].main )} key={day.id}/>
-                            })
-                        }
-                    </div>
-                </div>
                 <div className='weatherCity__searchContainer'>
                     <h3 className='weatherCity__title'>Search the weather of your city</h3>
                     <div className='weatherCity__inputContainer'>
@@ -188,12 +179,21 @@ function WeatherCity (){
                         </div>
                     </div>
                     <div className={dataWeather ? 'weatherCityWeek__container' : 'hidden'}>
-                        <p className='weatherCityWeek__title'>The weather of the week</p>
+                        <p className='weatherCityWeek__title'>Weather by hour</p>
                         <div className='weatherCityWeek__cards'>
                             {climaDia.map((day) => {
                                 return <WeatherCityCard temp={Math.trunc(day.main.temp) + '°'} day={day.dt_txt} min={'Min ' + Math.trunc(day.main.temp_min) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max) + ' °'} img={cloudyCard} key={day.dt_txt}/>
                             })}
                         </div>
+                    </div>
+                </div>
+                <div className='weatherCity__random'>
+                    <div className='weatherCity__containerRandom'>
+                        {
+                            arrCities.map((day) => {
+                                return <WeatherRandom temp={Math.trunc(day.main.temp) + '°'} city={day.name} weather={day.weather[0].main} min={'Min ' + Math.trunc(day.main.temp_min) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max) + ' °'} img={(day.weather[0].main )} key={day.id}/>
+                            })
+                        }
                     </div>
                 </div>
                 <div className='weatherCity__week'>
