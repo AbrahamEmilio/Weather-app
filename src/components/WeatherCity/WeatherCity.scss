@@ -9,6 +9,16 @@
     background-color: rgb(43,67,153);
     background: linear-gradient(45deg, rgba(43,67,153,1) 0%, rgba(110,137,230,1) 100%); 
 
+    &__random{
+        padding: 10px 0px;
+    }
+
+    &__containerRandom{
+        display: flex;
+        gap: 50px;
+        padding: 50px 0px;
+    }
+
     &Info{
         height: 500px;
     }

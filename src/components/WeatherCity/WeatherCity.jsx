@@ -1,20 +1,20 @@
-import {React,  useState} from 'react';
+import {React,  useState, useEffect} from 'react';
 import './WeatherCity.scss';
 import WeatherCityCard from './WeatherCityCard/WeatherCityCard.jsx';
+import WeatherRandom from './WeatherRandom/WeatherRandom.jsx';
 const API_KEY = 'c60df418b9927150faa290e3d8418c82';
 
 import clouds from '../../assets/cloud.png'
 import clear from '../../assets/sun.png'
 import rain from '../../assets/raining.png'
 import wind from '../../assets/wind.png'
-
 import cloudyCard from '../../assets/cloud.png'
-
 
 function WeatherCity (){
 
     const [cityName, setCityName] = useState('');
     const [dataWeather, setDataWeather] = useState('');
+    const [dataRandom, setDataRandom] = useState('');
     const [temp, setTemp] = useState('');
     const [tempMax, setTempMax] = useState('');
     const [tempMin, setTempMin] = useState('');
@@ -23,6 +23,7 @@ function WeatherCity (){
     const [climaDia, setClimaDia] = useState([]);
     const [clima, setClima] = useState();
     const [weatherIcon, setWeatherIcon] = useState();
+    const [arrCities, setArrCities] = useState([]);
     
         const getCoordinates = async() => {
             const responseL = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}&units=metric`);
@@ -106,9 +107,73 @@ function WeatherCity (){
 
         }
 
+    const weatherRandom = async() => {
+
+        let arrayCiudades = [];
+        const cities = ['Paris', 'Tokyo', 'Toronto', 'New York', 'Ciudad de mexico', 'Los angeles', 'dinamarca']
+
+        for(let i = 0; i < 3; i++){
+
+                let nr = Math.floor(Math.random() * cities.length -1)
+
+                const responseL = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cities[nr]}&appid=${API_KEY}&units=metric`);
+                const dataL = await responseL.json();
+        
+                let lat = await dataL[0].lat.toFixed(2);
+                let lon = await dataL[0].lon.toFixed(2);
+        
+                const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
+                const dataW = await responseW.json();
+                // setDataRandom(dataW);
+                arrayCiudades.push(dataW);
+        
+                // setName(dataW.name);
+                // setTemp(Math.trunc(dataW.main.temp) + ' °');
+                // setTempMax('Max ' + Math.trunc(dataW.main.temp_max) + ' °');
+                // setTempMin('Min ' + Math.trunc(dataW.main.temp_min) + ' °');
+                // setCountry(dataW.sys.country);
+        
+                switch(dataW.weather[0].main){
+        
+                    case 'Clouds':
+                    setWeatherIcon(clouds);
+                    console.log('clouds');
+                    break;
+        
+                    case 'Clear':
+                    setWeatherIcon(clear);
+                    console.log('clear');
+                    break;
+        
+                    case 'Rain':
+                        setWeatherIcon(rain);
+                        console.log('raining');
+                    break;
+        
+                    default:
+                        setWeatherIcon(clear)
+                    }
+            }
+
+        setArrCities(arrayCiudades)
+    }
+
+    useEffect(() => {
+        weatherRandom()
+    }, [])
+
     return(
         <>
             <div className='weatherCity'>
+                <div className='weatherCity__random'>
+                    <div className='weatherCity__containerRandom'>
+                        {
+                            arrCities.map((day) => {
+                                return <WeatherRandom temp={Math.trunc(day.main.temp) + '°'} city={day.name} weather={day.weather[0].main} min={'Min ' + Math.trunc(day.main.temp_min) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max) + ' °'} img={cloudyCard} key={day.id}/>
+                            })
+                        }
+                    </div>
+                </div>
                 <div className='weatherCity__searchContainer'>
                     <h3 className='weatherCity__title'>Search the weather of your city</h3>
                     <div className='weatherCity__inputContainer'>
@@ -151,7 +216,7 @@ function WeatherCity (){
                         </div>
                     </div>
                 </div>
-                {console.log(clima)}
+                {/* {console.log(clima)} */}
                 <div className='weatherCity__week'>
                 </div>
             </div>
