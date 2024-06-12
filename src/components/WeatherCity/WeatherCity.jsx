@@ -8,13 +8,14 @@ import clouds from '../../assets/cloud.png'
 import clear from '../../assets/sun.png'
 import rain from '../../assets/raining.png'
 import wind from '../../assets/wind.png'
-import cloudyCard from '../../assets/cloud.png'
+
+// import cloudyCard from '../../assets/cloud.png'
 
 function WeatherCity (){
 
     const [cityName, setCityName] = useState('');
     const [dataWeather, setDataWeather] = useState('');
-    const [dataRandom, setDataRandom] = useState('');
+    const [weatherIconRandom, setWeatherIconRandom] = useState('');
     const [temp, setTemp] = useState('');
     const [tempMax, setTempMax] = useState('');
     const [tempMin, setTempMin] = useState('');
@@ -110,7 +111,7 @@ function WeatherCity (){
     const weatherRandom = async() => {
 
         let arrayCiudades = [];
-        const cities = ['Paris', 'Tokyo', 'Toronto', 'New York', 'Ciudad de mexico', 'Los angeles', 'dinamarca']
+        const cities = ['Paris', 'Tokyo', 'Toronto', 'New York', 'Ciudad de mexico', 'Los angeles', 'dinamarca', 'Dubai', 'San francisco', 'Estambul', 'Oporto', 'Seul', 'Amsterdam', 'Praga', 'Bangkok']
 
         for(let i = 0; i < 3; i++){
 
@@ -124,34 +125,28 @@ function WeatherCity (){
         
                 const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
                 const dataW = await responseW.json();
-                // setDataRandom(dataW);
                 arrayCiudades.push(dataW);
         
-                // setName(dataW.name);
-                // setTemp(Math.trunc(dataW.main.temp) + ' °');
-                // setTempMax('Max ' + Math.trunc(dataW.main.temp_max) + ' °');
-                // setTempMin('Min ' + Math.trunc(dataW.main.temp_min) + ' °');
-                // setCountry(dataW.sys.country);
         
                 switch(dataW.weather[0].main){
         
                     case 'Clouds':
-                    setWeatherIcon(clouds);
+                    setWeatherIconRandom(clouds);
                     console.log('clouds');
                     break;
         
                     case 'Clear':
-                    setWeatherIcon(clear);
+                    setWeatherIconRandom(clear);
                     console.log('clear');
                     break;
         
                     case 'Rain':
-                        setWeatherIcon(rain);
-                        console.log('raining');
+                    setWeatherIconRandom(rain);
+                    console.log('raining');
                     break;
         
                     default:
-                        setWeatherIcon(clear)
+                    setWeatherIconRandom(clear)
                     }
             }
 
@@ -169,8 +164,11 @@ function WeatherCity (){
                     <div className='weatherCity__containerRandom'>
                         {
                             arrCities.map((day) => {
-                                return <WeatherRandom temp={Math.trunc(day.main.temp) + '°'} city={day.name} weather={day.weather[0].main} min={'Min ' + Math.trunc(day.main.temp_min) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max) + ' °'} img={cloudyCard} key={day.id}/>
+                                return <WeatherRandom temp={Math.trunc(day.main.temp) + '°'} city={day.name} weather={day.weather[0].main} min={'Min ' + Math.trunc(day.main.temp_min) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max) + ' °'} img={weatherIconRandom} key={day.id}/>
                             })
+                        }
+                        {
+                            console.log(arrCities)
                         }
                     </div>
                 </div>
