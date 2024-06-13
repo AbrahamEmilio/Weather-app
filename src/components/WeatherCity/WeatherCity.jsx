@@ -125,7 +125,7 @@ function WeatherCity (){
                         }}>Search</button>
                     </div>
                 </div>
-                <div className='division'></div>
+                <div className={dataWeather ? 'division' : 'hidden'}></div>
                 <div className='weatherCityInfo'>
                     <div className={dataWeather ? 'weatherCity__container' : 'hidden'}>
                         <img src={weatherIcon} className='weatherCity__icon' alt="" />
@@ -161,8 +161,8 @@ function WeatherCity (){
                         <img src={map} alt="" />
                     </div>
                 </div>
-                <div className='division'></div>
-                <div className='weatherCity__random'>
+                <div className={arrCities ? 'division' : 'hidden'}></div>
+                <div className={arrCities ? 'weatherCity__random' : 'hidden'}>
                     <p className='weatherCity__randomTitle'>The weather of the world</p>
                     <div className='weatherCity__containerRandom'>
                         {
