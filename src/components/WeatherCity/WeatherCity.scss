@@ -1,3 +1,8 @@
+.division{
+    width: 90%;
+    border: solid 1px white;
+    opacity: 20%;
+}
 .weatherCity{
     width: 100%;
     display: flex;
@@ -25,6 +30,8 @@
 
     &__containerRandom{
         display: flex;
+        justify-content: center;
+        align-items: center;
         gap: 50px;
         padding: 50px 0px;
     }
@@ -172,14 +179,12 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border: solid 1px white;
-            border-radius: 20px;
             padding: 20px;
         }
 
     &__cards{
             display: flex;
-            gap: 20px;
+            gap: 10px;
         }
 
     &__title{

@@ -3,11 +3,13 @@ import './WeatherCity.scss';
 import WeatherCityCard from './WeatherCityCard/WeatherCityCard.jsx';
 import WeatherRandom from './WeatherRandom/WeatherRandom.jsx';
 const API_KEY = 'c60df418b9927150faa290e3d8418c82';
+const API_KEYW = '6d896c09c0734efea15154239241306';
 
 import clouds from '../../assets/cloud.png'
 import clear from '../../assets/sun.png'
 import rain from '../../assets/raining.png'
 import wind from '../../assets/wind.png'
+import drizzle from '../../assets/drizzle.png'
 
 import cloudyCard from '../../assets/cloud.png'
 
@@ -19,9 +21,7 @@ function WeatherCity (){
     const [tempMax, setTempMax] = useState('');
     const [tempMin, setTempMin] = useState('');
     const [name, setName] = useState('');
-    const [country, setCountry] = useState('');
     const [climaDia, setClimaDia] = useState([]);
-    const [clima, setClima] = useState();
     const [weatherIcon, setWeatherIcon] = useState();
     const [arrCities, setArrCities] = useState([]);
     const [map, setMap] = useState('');
@@ -37,11 +37,10 @@ function WeatherCity (){
             const dataW = await responseW.json();
             setDataWeather(dataW);
 
-            setName(dataW.name);
+            setName(dataL[0].name);
             setTemp(Math.trunc(dataW.main.temp) + ' °');
             setTempMax('Max ' + Math.trunc(dataW.main.temp_max) + ' °');
             setTempMin('Min ' + Math.trunc(dataW.main.temp_min) + ' °');
-            setCountry(dataW.sys.country);
 
             switch(dataW.weather[0].main){
 
@@ -57,52 +56,23 @@ function WeatherCity (){
                     setWeatherIcon(rain);
                 break;
 
+                case 'Drizzle':
+                    setWeatherIcon(drizzle);
+                break;
+
                 default:
                     setWeatherIcon(clear)
             }
 
-            getWeatherHouer(lat, lon)
-
+            const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEYW}&q=${dataL[0].name}&days=7`);
+            const dataD = await response.json();
+            setClimaDia(dataD.forecast.forecastday)
         }
 
-        const getWeatherHouer = async(lat, lon) => {
-            const responseD = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&timezone_offset=${'GMT-6'}`);
-            const dataD = await responseD.json();
-
-            //Guardamos el array con el clima por hora en DaysWeather
-            let daysWeather;
-            daysWeather = dataD.list;
-            //Creamos un array para almacenar solo los dias de la lista
-            let arrWeek = [];
-
-            //Iteramos sobre el estado donde se encuentran todos los dias y los dividimos para obtener solo el dia en un array nuevo
-            daysWeather.forEach((element) => {
-                let firstArray = element.dt_txt.split(' ');
-                let secondArray = firstArray[0].split('-');
-                arrWeek.push(secondArray[2]);
-            })
-
-            //Creamos un objeto del dia actual y lo guardamos en una estado llamado DateNow
-            const now = new Date();
-            const day = now.getDate().toString();
-
-            let finded = [];
-
-            let idx = arrWeek.indexOf(day);
-            while(idx != -1){
-                finded.push(idx);
-                idx = arrWeek.indexOf(day, idx + 1);
-            }
-
-            const climaHora = []
-
-            finded.forEach((e) => {
-                climaHora.push(daysWeather[e])
-            })
-
-            setClimaDia(climaHora)
-
-        }
+        useEffect(() => {
+            weatherRandom()
+            getMap()
+        }, [])
 
         const weatherRandom = async() => {
 
@@ -116,9 +86,7 @@ function WeatherCity (){
 
                     if(!numbers.includes(nr)){
                         numbers.push(nr)
-                        console.log('no esta')
                     } else {
-                        console.log('si estaba')
                         nr = Math.floor(Math.random() * cities.length -1)
                         numbers.push(nr)
                     }
@@ -142,14 +110,8 @@ function WeatherCity (){
         const getMap = async() => {
             const response = await fetch(`https://tile.openweathermap.org/map/{temp_new}/${1}/${1}/${1}.png?appid=${API_KEY}`)
             const data = await response.json()
-            console.log(data)
             setMap(data)
         }
-
-    useEffect(() => {
-        weatherRandom()
-        getMap()
-    }, [])
 
     return(
         <>
@@ -163,7 +125,7 @@ function WeatherCity (){
                         }}>Search</button>
                     </div>
                 </div>
-                {console.log(arrCities)}
+                <div className='division'></div>
                 <div className='weatherCityInfo'>
                     <div className={dataWeather ? 'weatherCity__container' : 'hidden'}>
                         <img src={weatherIcon} className='weatherCity__icon' alt="" />
@@ -183,16 +145,15 @@ function WeatherCity (){
                                 <p className='weatherCity__speed'>{(dataWeather ? dataWeather.wind.speed : '')}</p>
                             </div>
                             <div className='weatherCity__cityContainer'>
-                                <p className='weatherCity__country'>{(country)}</p>
                                 <p className='weatherCity__city'>{(name)}</p>
                             </div>
                         </div>
                     </div>
                     <div className={dataWeather ? 'weatherCityWeek__container' : 'hidden'}>
-                        <p className='weatherCityWeek__title'>Weather by hour</p>
+                        <p className='weatherCityWeek__title'>Weather week</p>
                         <div className='weatherCityWeek__cards'>
                             {climaDia.map((day) => {
-                                return <WeatherCityCard temp={Math.trunc(day.main.temp) + '°'} day={day.dt_txt} min={'Min ' + Math.trunc(day.main.temp_min) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max) + ' °'} img={cloudyCard} key={day.dt_txt}/>
+                                return <WeatherCityCard /*day={day.dt_txt}*/ max={'Max ' + day.day.maxtemp_c + ' °'} min={'Min ' + day.day.mintemp_c + ' °'} /*img={cloudyCard}*/ key={day.date}/>
                             })}
                         </div>
                     </div>
@@ -200,6 +161,7 @@ function WeatherCity (){
                         <img src={map} alt="" />
                     </div>
                 </div>
+                <div className='division'></div>
                 <div className='weatherCity__random'>
                     <p className='weatherCity__randomTitle'>The weather of the world</p>
                     <div className='weatherCity__containerRandom'>
@@ -212,6 +174,7 @@ function WeatherCity (){
                 </div>
                 <div className='weatherCity__week'>
                 </div>
+                {console.log(climaDia)}
             </div>
         </>
     )
