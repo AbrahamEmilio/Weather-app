@@ -11,8 +11,6 @@ import rain from '../../assets/raining.png'
 import wind from '../../assets/wind.png'
 import drizzle from '../../assets/drizzle.png'
 
-import cloudyCard from '../../assets/cloud.png'
-
 function WeatherCity (){
 
     const [cityName, setCityName] = useState('');
@@ -153,7 +151,7 @@ function WeatherCity (){
                         <p className='weatherCityWeek__title'>Weather week</p>
                         <div className='weatherCityWeek__cards'>
                             {climaDia.map((day) => {
-                                return <WeatherCityCard /*day={day.dt_txt}*/ max={'Max ' + day.day.maxtemp_c + ' °'} min={'Min ' + day.day.mintemp_c + ' °'} /*img={cloudyCard}*/ key={day.date}/>
+                                return <WeatherCityCard /*day={day.dt_txt}*/ max={'Max ' + day.day.maxtemp_c + '°'} min={'Min ' + day.day.mintemp_c + '°'} img={day.day.condition.text} key={day.date}/>
                             })}
                         </div>
                     </div>

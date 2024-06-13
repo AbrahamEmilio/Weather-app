@@ -4,6 +4,8 @@ import './WeatherRandom.scss';
 import clouds from '../../../assets/cloud.png'
 import clear from '../../../assets/sun.png'
 import rain from '../../../assets/raining.png'
+import wind from '../../../assets/wind.png'
+import drizzle from '../../../assets/drizzle.png'
 
 
 function WeatherRandom ({temp, city, weather, min, max, img, key}){
