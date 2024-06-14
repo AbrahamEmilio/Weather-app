@@ -144,7 +144,7 @@ function WeatherCity (){
                     </div>
                     <div className={dataWeather ? 'division' : 'hidden'}></div>
                     <div className={dataWeather ? 'weatherCityWeek__container' : 'hidden'}>
-                        <p className='weatherCityWeek__title'>Weather week</p>
+                        <p className='weatherCityWeek__title'>{`The weather week of ${(name)}`}</p>
                         <div className='weatherCityWeek__cards'>
                             {climaDia.map((day) => {
                                 return <WeatherCityCard max={'max ' + day.day.maxtemp_c + '°'} min={'min ' + day.day.mintemp_c + '°'} img={day.day.condition.text} key={day.date} date={day.date}/>
