@@ -174,7 +174,6 @@ function WeatherCity (){
                 </div>
                 <div className='weatherCity__week'>
                 </div>
-                {console.log(climaDia)}
             </div>
         </>
     )

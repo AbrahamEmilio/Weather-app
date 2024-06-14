@@ -85,8 +85,6 @@ function WeatherCityCard ({min, max, key, img, date}){
         changeDate();
     }, [])
 
-    console.log(dayWeek)
-
     return(
         <>
             <div className='weatherCityCard' key={key}>
