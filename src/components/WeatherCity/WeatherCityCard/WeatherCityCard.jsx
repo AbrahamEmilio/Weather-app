@@ -16,10 +16,8 @@ function WeatherCityCard ({min, max, key, img, date}){
 
     const changeDate = () => {
         const dateDay = date
-        const newDateDay = dateDay.replace('-', ', ')
-        const newDateDay2 = newDateDay.replace('-', ', ')
-
-        const dateConvert = new Date(newDateDay2);
+        const newDateDay = dateDay.replace(/-/g, ', ');
+        const dateConvert = new Date(newDateDay);
         const dateConvert2 = dateConvert.toString();
         const dateConvert3 = dateConvert2.split(" ");
         setDateJs(dateConvert3[0])
