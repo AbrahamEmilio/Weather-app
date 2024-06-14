@@ -32,13 +32,14 @@ function WeatherCity (){
         for(let i = 0; i < 4; i++){
 
                 let nr = Math.floor(Math.random() * cities.length -1)
+                numbers.push(nr)
 
-                if(!numbers.includes(nr)){
-                    numbers.push(nr)
-                } else {
-                    nr = Math.floor(Math.random() * cities.length -1)
-                    numbers.push(nr)
-                }
+                // if(!numbers.includes(nr)){
+                //     numbers.push(nr)
+                // } else {
+                //     nr = Math.floor(Math.random() * cities.length -1)
+                //     numbers.push(nr)
+                // }
             }
 
         await Promise.all (numbers.map(async (e) => {
