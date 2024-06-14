@@ -11,6 +11,8 @@
     padding: 25px 0px;
     border-radius: 20px;
     width: 220px;
+    transition-property: all;
+    transition-duration: .2s;
 
     &__tempContainer{
     display: flex;
@@ -72,4 +74,11 @@
     &__icon{
         width: 50px;
     }
+}
+
+.weatherRandom:hover{
+    transition-property: all;
+    transition-duration: .2s;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
 }

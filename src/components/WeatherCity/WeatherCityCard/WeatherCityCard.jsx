@@ -1,17 +1,17 @@
-import {React, useState, useEffect} from 'react';
 import './WeatherCityCard.scss';
+import {React, useState, useEffect} from 'react';
 
 import clouds from '../../../assets/cloud.png'
 import clear from '../../../assets/sun.png'
 import rain from '../../../assets/raining.png'
 import wind from '../../../assets/wind.png'
 import drizzle from '../../../assets/drizzle.png'
+import patchy from '../../../assets/patchy.png'
 
 
 function WeatherCityCard ({min, max, key, img, date}){
 
     const [weatherIcon2, setWeatherIcon2] = useState();
-    const [dateJs, setDateJs] = useState();
     const [dayWeek, setDayWeek] = useState();
 
     const changeDate = () => {
@@ -21,9 +21,8 @@ function WeatherCityCard ({min, max, key, img, date}){
         const dateConvert2 = dateConvert.toString();
         const dateConvert3 = dateConvert2.split(" ");
         const dataClean = dateConvert3[0]
-        setDateJs(dataClean)
 
-        switch(dateJs){
+        switch(dataClean){
             case 'Mon':
             setDayWeek('Monday');
             break;
@@ -61,7 +60,7 @@ function WeatherCityCard ({min, max, key, img, date}){
         switch(img){
 
             case 'Patchy rain nearby':
-            setWeatherIcon2(clouds);
+            setWeatherIcon2(patchy);
             break;
     
             case 'Sunny':
@@ -95,6 +94,7 @@ function WeatherCityCard ({min, max, key, img, date}){
                     <img className='weatherCityCard__icon' alt="" src={weatherIcon2} />
                     <p className='weatherCityCard__day'>{dayWeek}</p>
                 </div>
+                <div className='division'></div>
                 <div weatherCityCard__info>
                     <div className='weatherCityCard__tempContainer'>
                         <p className='weatherCityCard__temp'>{img}</p>

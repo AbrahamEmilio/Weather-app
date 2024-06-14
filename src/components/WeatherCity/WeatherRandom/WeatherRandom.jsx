@@ -45,6 +45,7 @@ function WeatherRandom ({temp, city, weather, min, max, img, key}){
                 </div>
                 <div className='weatherRandom__info'>
                     <p className='weatherRandom__city'>{city}</p>
+                    <div className='division'></div>
                     <p className='weatherRandom__weather'>{weather}</p>
                     <div className='weatherRandom__maxContainer'>
                         <p className='weatherRandom__max'>{max}</p>

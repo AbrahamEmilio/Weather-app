@@ -132,6 +132,7 @@ function WeatherCity (){
                                 <p className='weatherCity__temp'>{temp}</p>
                                 <p className='weatherCity__city'>{(name)}</p>
                             </div>
+                            <div className='division'></div>
                             <div className='weatherCity__cityContainer'>
                             </div>
                             <div className='weatherCity__tempMaxMinContainer'>
@@ -151,7 +152,7 @@ function WeatherCity (){
                         <p className='weatherCityWeek__title'>Weather week</p>
                         <div className='weatherCityWeek__cards'>
                             {climaDia.map((day) => {
-                                return <WeatherCityCard /*day={day.dt_txt}*/ max={'max ' + day.day.maxtemp_c + '°'} min={'min ' + day.day.mintemp_c + '°'} img={day.day.condition.text} key={day.date} date={day.date}/>
+                                return <WeatherCityCard max={'max ' + day.day.maxtemp_c + '°'} min={'min ' + day.day.mintemp_c + '°'} img={day.day.condition.text} key={day.date} date={day.date}/>
                             })}
                         </div>
                     </div>
