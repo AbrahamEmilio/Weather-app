@@ -20,7 +20,8 @@ function WeatherCityCard ({min, max, key, img, date}){
         const dateConvert = new Date(newDateDay);
         const dateConvert2 = dateConvert.toString();
         const dateConvert3 = dateConvert2.split(" ");
-        setDateJs(dateConvert3[0])
+        const dataClean = dateConvert3[0]
+        setDateJs(dataClean)
 
         switch(dateJs){
             case 'Mon':
