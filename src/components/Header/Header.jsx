@@ -8,7 +8,7 @@ function Header(){
                     <div className='header__title-container'>
                         <p className='header__title'>Weather App</p>
                     </div>
-                    <div className='header__menu-container'>
+                    {/* <div className='header__menu-container'>
                         <ul className='header__menu'>
                             <li className='header__listItem'>
                                 <p>Weather</p>
@@ -20,7 +20,7 @@ function Header(){
                                 <p>Contact</p>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
             </div>
         </>
     )

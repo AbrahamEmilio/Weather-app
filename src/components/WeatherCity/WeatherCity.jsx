@@ -75,8 +75,8 @@ function WeatherCity (){
 
             setName(dataL[0].name);
             setTemp(Math.trunc(dataW.main.temp) + ' °');
-            setTempMax('Max ' + Math.trunc(dataW.main.temp_max) + ' °');
-            setTempMin('Min ' + Math.trunc(dataW.main.temp_min) + ' °');
+            setTempMax('max ' + Math.trunc(dataW.main.temp_max) + '°');
+            setTempMin('min ' + Math.trunc(dataW.main.temp_min) + '°');
 
             switch(dataW.weather[0].main){
 
@@ -129,12 +129,12 @@ function WeatherCity (){
                             <div className={dataWeather ? 'division' : 'hidden'}></div>
                             <div className='weatherCity__cityContainer'>
                             </div>
+                            <div className='weatherCity__weatherContainer'>
+                                <p className='weatherCity__description'>{(dataWeather ? dataWeather.weather[0].main : '')}</p>
+                            </div>
                             <div className='weatherCity__tempMaxMinContainer'>
                                 <p className='weatherCity__tempMax'>{tempMax}</p>
                                 <p className='weatherCity__tempMin'>{tempMin}</p>
-                            </div>
-                            <div className='weatherCity__weatherContainer'>
-                                <p className='weatherCity__description'>{(dataWeather ? dataWeather.weather[0].main : '')}</p>
                             </div>
                             <div className='weatherCity__windContainer'>
                             <img className='weatherCity__windIcon' src={wind} alt="" />
