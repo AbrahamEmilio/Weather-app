@@ -28,7 +28,7 @@ function WeatherCity (){
             const responseL = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}&units=metric`);
             const dataL = await responseL.json();
 
-            const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEYW}&q=${dataL[0].name}&days=7`);
+            const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEYW}&q=${dataL[0].name}&days=7`);
             const dataD = await response.json();
             const dataD2 = dataD.forecast.forecastday;
             setClimaDia(dataD2)
