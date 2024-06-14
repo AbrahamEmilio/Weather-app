@@ -22,7 +22,6 @@ function WeatherCity (){
     const [climaDia, setClimaDia] = useState([]);
     const [weatherIcon, setWeatherIcon] = useState();
     const [arrCities, setArrCities] = useState([]);
-    const [map, setMap] = useState('');
     
         const getCoordinates = async() => {
             const responseL = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${API_KEY}&units=metric`);
@@ -68,18 +67,13 @@ function WeatherCity (){
             }
         }
 
-        useEffect(() => {
-            weatherRandom()
-            getMap()
-        }, [])
-
         const weatherRandom = async() => {
 
             let arrayCiudades = [];
             const cities = ['Paris', 'Tokyo', 'Toronto', 'New York', 'Ciudad de mexico', 'Los angeles', 'dinamarca', 'Dubai', 'San francisco', 'Estambul', 'Oporto', 'Seul', 'Amsterdam', 'Praga', 'Bangkok']
             let numbers = [];
 
-            for(let i = 0; i < 5; i++){
+            for(let i = 0; i < 4; i++){
 
                     let nr = Math.floor(Math.random() * cities.length -1)
 
@@ -106,11 +100,9 @@ function WeatherCity (){
             setArrCities(arrayCiudades)
         }
 
-        const getMap = async() => {
-            const response = await fetch(`https://tile.openweathermap.org/map/{temp_new}/${1}/${1}/${1}.png?appid=${API_KEY}`)
-            const data = await response.json()
-            setMap(data)
-        }
+        useEffect(() => {
+            weatherRandom()
+        }, [])
 
     return(
         <>
@@ -133,7 +125,7 @@ function WeatherCity (){
                                 <p className='weatherCity__temp'>{temp}</p>
                                 <p className='weatherCity__city'>{(name)}</p>
                             </div>
-                            <div className='division'></div>
+                            <div className={dataWeather ? 'division' : 'hidden'}></div>
                             <div className='weatherCity__cityContainer'>
                             </div>
                             <div className='weatherCity__tempMaxMinContainer'>
@@ -149,6 +141,7 @@ function WeatherCity (){
                             </div>
                         </div>
                     </div>
+                    <div className={dataWeather ? 'division' : 'hidden'}></div>
                     <div className={dataWeather ? 'weatherCityWeek__container' : 'hidden'}>
                         <p className='weatherCityWeek__title'>Weather week</p>
                         <div className='weatherCityWeek__cards'>
@@ -157,9 +150,6 @@ function WeatherCity (){
                             })}
                         </div>
                     </div>
-                    <div>
-                        <img src={map} alt="" />
-                    </div>
                 </div>
                 <div className={arrCities ? 'division' : 'hidden'}></div>
                 <div className={arrCities ? 'weatherCity__random' : 'hidden'}>
@@ -167,7 +157,7 @@ function WeatherCity (){
                     <div className='weatherCity__containerRandom'>
                         {
                             arrCities.map((day) => {
-                                return <WeatherRandom temp={Math.trunc(day.main.temp) + '°'} city={day.name} weather={day.weather[0].main} min={'Min ' + Math.trunc(day.main.temp_min) + ' °'} max={'Max ' + Math.trunc(day.main.temp_max) + ' °'} img={(day.weather[0].main )} key={day.id}/>
+                                return <WeatherRandom temp={Math.trunc(day.main.temp) + '°'} city={day.name} weather={day.weather[0].main} min={'min ' + Math.trunc(day.main.temp_min) + ' °'} max={'max ' + Math.trunc(day.main.temp_max) + ' °'} img={(day.weather[0].main )} key={day.id}/>
                             })
                         }
                     </div>
@@ -175,6 +165,7 @@ function WeatherCity (){
                 <div className='weatherCity__week'>
                 </div>
             </div>
+            {console.log(dataWeather)}
         </>
     )
 }

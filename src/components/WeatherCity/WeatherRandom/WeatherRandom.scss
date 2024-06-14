@@ -8,9 +8,9 @@
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.10);
-    padding: 25px 10px;
+    padding: 20px 0px;
     border-radius: 20px;
-    width: 220px;
+    width: 200px;
     transition-property: all;
     transition-duration: .2s;
 
@@ -19,6 +19,7 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
+    margin-bottom: 10px;
     }
 
     &__info{
@@ -30,14 +31,14 @@
     }
 
     &__temp{
-        font-size: 40px;
+        font-size: 30px;
         color: white;
         font-weight: 900;
         text-align: center;
     }
 
     &__city{
-        font-size: 20px;
+        font-size: 18px;
         color: white;
         font-weight: 500;
     }
@@ -74,7 +75,7 @@
     }
 
     &__icon{
-        width: 70px;
+        width: 50px;
     }
 }
 
