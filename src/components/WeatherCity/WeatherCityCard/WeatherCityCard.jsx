@@ -68,9 +68,13 @@ function WeatherCityCard ({min, max, key, img, date}){
             break;
     
             case 'Partly Cloudy':
-                setWeatherIcon2(rain);
+                setWeatherIcon2(clouds);
             break;
     
+            case 'Heavy rain':
+                setWeatherIcon2(rain);
+            break;
+
             case 'Moderate rain':
                 setWeatherIcon2(drizzle);
             break;
