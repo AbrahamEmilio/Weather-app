@@ -32,8 +32,6 @@ function WeatherCity (){
         for(let i = 0; i < 4; i++){
 
                 let nr = Math.floor(Math.random() * cities.length)
-                numbers.push(nr)
-                console.log(nr)
 
                 if(!numbers.includes(nr)){
                     numbers.push(nr)
