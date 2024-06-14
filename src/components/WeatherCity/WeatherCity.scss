@@ -99,11 +99,13 @@
     }
 
     &__icon{
-        width: 180px;
+        width: 140px;
     }
 
     &__tempContainer{
         display: flex;
+        justify-content: center;
+        align-items: center;
         gap: 10px;
     }
 
@@ -119,11 +121,6 @@
         align-items: center;
         gap: 10px;
         margin: 5px 0px;
-    }
-
-    &__cityContainer{
-        display: flex;
-        gap: 10px;
     }
 
     &__temp{
@@ -167,7 +164,7 @@
     }
 
     &__city{
-        font-size: 20px;
+        font-size: 30px;
         color: white;
         font-weight: 300;
     }

@@ -12,6 +12,13 @@
     border-radius: 20px;
     width: 100px;
 
+    &__day{
+        font-size: 25px;
+        color: white;
+        font-weight: 500;
+        text-align: center;
+    }
+
     &__info{
         display: flex;
         flex-direction: column;
@@ -22,8 +29,16 @@
     &__temp{
         font-size: 15px;
         color: white;
-        font-weight: 500;
+        font-weight: 300;
         text-align: center;
+
+        &Container{
+            width: 90%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 
     &__maxContainer{
@@ -59,6 +74,7 @@
             width: 90%;
             height: 50px;
             display: flex;
+            flex-direction:  column;
             justify-content: center;
             align-items: center;
         }

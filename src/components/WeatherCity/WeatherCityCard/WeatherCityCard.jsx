@@ -8,9 +8,55 @@ import wind from '../../../assets/wind.png'
 import drizzle from '../../../assets/drizzle.png'
 
 
-function WeatherCityCard ({min, max, key, img}){
+function WeatherCityCard ({min, max, key, img, date}){
 
     const [weatherIcon2, setWeatherIcon2] = useState();
+    const [dateJs, setDateJs] = useState();
+    const [dayWeek, setDayWeek] = useState();
+
+    const changeDate = () => {
+        const dateDay = date
+        const newDateDay = dateDay.replace('-', ', ')
+        const newDateDay2 = newDateDay.replace('-', ', ')
+
+        const dateConvert = new Date(newDateDay2);
+        const dateConvert2 = dateConvert.toString();
+        const dateConvert3 = dateConvert2.split(" ");
+        setDateJs(dateConvert3[0])
+
+        switch(dateJs){
+            case 'Mon':
+            setDayWeek('Monday');
+            break;
+
+            case 'Tue':
+            setDayWeek('Tuesday');
+            break;
+
+            case 'Wed':
+            setDayWeek('Wednesday');
+            break;
+
+            case 'Thu':
+            setDayWeek('Thursday');
+            break;
+                    
+            case 'Fri':
+            setDayWeek('Friday');
+            break;
+
+            case 'Sat':
+            setDayWeek('Saturday');
+            break;
+
+            case 'Sun':
+            setDayWeek('Sunday');
+            break;
+
+            default:
+                setDayWeek('')
+        }
+    }
 
     const getIcon2 = () => {
         switch(img){
@@ -36,19 +82,24 @@ function WeatherCityCard ({min, max, key, img}){
         }
     }
 
-
     useEffect(() => {
         getIcon2();
+        changeDate();
     }, [])
+
+    console.log(dayWeek)
 
     return(
         <>
             <div className='weatherCityCard' key={key}>
                 <div className='weatherCityCard__iconContainer'>
                     <img className='weatherCityCard__icon' alt="" src={weatherIcon2} />
+                    <p className='weatherCityCard__day'>{dayWeek}</p>
                 </div>
                 <div weatherCityCard__info>
+                    <div className='weatherCityCard__tempContainer'>
                         <p className='weatherCityCard__temp'>{img}</p>
+                    </div>
                     <div className='weatherCityCard__maxContainer'>
                         <p className='weatherCityCard__max'>{max}</p>
                         <p className='weatherCityCard__min'>{min}</p>

@@ -130,6 +130,9 @@ function WeatherCity (){
                         <div className='weatherCity__infoContainer'>
                             <div className='weatherCity__tempContainer'>
                                 <p className='weatherCity__temp'>{temp}</p>
+                                <p className='weatherCity__city'>{(name)}</p>
+                            </div>
+                            <div className='weatherCity__cityContainer'>
                             </div>
                             <div className='weatherCity__tempMaxMinContainer'>
                                 <p className='weatherCity__tempMax'>{tempMax}</p>
@@ -142,16 +145,13 @@ function WeatherCity (){
                             <img className='weatherCity__windIcon' src={wind} alt="" />
                                 <p className='weatherCity__speed'>{(dataWeather ? dataWeather.wind.speed : '')}</p>
                             </div>
-                            <div className='weatherCity__cityContainer'>
-                                <p className='weatherCity__city'>{(name)}</p>
-                            </div>
                         </div>
                     </div>
                     <div className={dataWeather ? 'weatherCityWeek__container' : 'hidden'}>
                         <p className='weatherCityWeek__title'>Weather week</p>
                         <div className='weatherCityWeek__cards'>
                             {climaDia.map((day) => {
-                                return <WeatherCityCard /*day={day.dt_txt}*/ max={'Max ' + day.day.maxtemp_c + '°'} min={'Min ' + day.day.mintemp_c + '°'} img={day.day.condition.text} key={day.date}/>
+                                return <WeatherCityCard /*day={day.dt_txt}*/ max={'max ' + day.day.maxtemp_c + '°'} min={'min ' + day.day.mintemp_c + '°'} img={day.day.condition.text} key={day.date} date={day.date}/>
                             })}
                         </div>
                     </div>
